@@ -7,7 +7,7 @@ pipeline {
     }
     environment {
         MAVEN_ARGS='-v /tmp/ninja/.m2:/root/.m2'
-        DOCKER_HUB_ACCOUNT='dockerdonegal'
+        DOCKER_HUB_ACCOUNT='ciar0468'
         APPLICATION_NAME='ninja'
         APPLICATION_TAG_VERSION='v0.0.1-rc3'
     }
@@ -52,7 +52,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhubid', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
                     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                    sh "docker push ${env.DOCKER_HUB_ACCOUNT}/${env.APPLICATION_NAME}-qa:v4"
+                    sh "docker push ${env.DOCKER_HUB_ACCOUNT}/${env.APPLICATION_NAME}-qa:${env.APPLICATION_TAG_VERSION}"
                 }
             }
         }
